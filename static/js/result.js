@@ -10,7 +10,7 @@ function getComment(){
       $(".comment-list").empty();
       console.log(result);
       let rows = result.msg
-      for(let i=0; i<rows.length; i++){
+      for(let i=(rows.length-1); i>-1; i--){
         let comment = rows[i].comment_receive;
         comment = comment.replaceAll('\n','<br/>');
         let temp_html=`<article class="media">

@@ -1,12 +1,15 @@
 from flask import Flask, render_template, jsonify, request
-# from pymongo import MongoClient
-# from dotenv import load_dotenv
-# import certifi
-# import os
+from pymongo import MongoClient
+from dotenv import load_dotenv
+import certifi
+import os
 app = Flask(__name__)
 
-from pymongo import MongoClient
-client = MongoClient('mongodb+srv://wh90:vhs73577!@cluster0.jqjzs.mongodb.net/Cluster0?retryWrites=true&w=majority')
+load_dotenv()
+MONGODB_URL = os.getenv('MONGODB_URL')
+
+ca = certifi.where()
+client = MongoClient(MONGODB_URL, tlsCAFile=ca)
 db = client.MBTI
 
 @app.route('/')
@@ -31,6 +34,9 @@ def commentAction():
 def getComment():
     # comment_receive = request.agrs.get['txt']
     all_comment = list(db.comment.find({},{'_id':False}))
+    # for alls in all_comment:
+    #     print(alls)
+    print(all_comment)
     return jsonify({'msg': all_comment})
 
 if __name__ == '__main__':
