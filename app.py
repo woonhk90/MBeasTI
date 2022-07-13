@@ -168,11 +168,13 @@ def commentAction():
     now = datetime.now()
     comment_receive = request.form['txt']
     user_receive = request.form['user']
+    now_mbti = request.form['now_mbti']
     print(comment_receive)
     doc={
         'comment_receive':comment_receive,
         'user_name':user_receive,
-        'data_time':math.trunc(now.timestamp())
+        'data_time':math.trunc(now.timestamp()),
+        'now_mbti':now_mbti
     }
     db.comment.insert_one(doc)
     return jsonify({'msg': '등록완료'})
@@ -182,8 +184,9 @@ def commentAction():
 def getComment():
     token_chk()
 
-    # comment_receive = request.agrs.get['txt']
-    all_comment = list(db.comment.find({},{'_id':False}))
+    now_mbti = request.args.get('now_mbti')
+    print("아아",now_mbti);
+    all_comment = list(db.comment.find({'now_mbti':now_mbti},{'_id':False}))
     # for alls in all_comment:
     #     print(alls)
     print(all_comment)

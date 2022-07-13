@@ -5,13 +5,11 @@ function getComment(){
   $.ajax({
     url:'./getComment',
     type:'GET',
-    data:{},
+    data:{now_mbti:$(".user_mbti").text()},
     success:function(result){
       $(".comment-list").empty();
-      console.log(result);
       let rows = result.msg
       let nowUserName = $(".user-name").data('name');
-      console.log(nowUserName);
       for(let i=(rows.length-1); i>-1; i--){
         let dataTime = rows[i].data_time;
         let userName = rows[i].user_name;
@@ -66,7 +64,7 @@ $(".submit").on({
       $.ajax({
       url:'./commentAction',
       type:'POST',
-      data:{ txt : $comment.val(), user : userName },
+      data:{ txt : $comment.val(), user : userName, now_mbti: $(".user_mbti").text() },
       success:function(result){
         alert(result.msg);
         $comment.val("");
@@ -95,7 +93,6 @@ $(".submit").on({
 $(document).on("click",'.del-btn',function(){
   if(confirm('삭제 하시겠습니까?')){
     let commentTime = $(this).parent().siblings(".val-time").data("time");
-    alert(commentTime);
     $.ajax({
       url:'/commit-del',
       type:"POST",
