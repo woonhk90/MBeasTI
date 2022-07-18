@@ -11,35 +11,59 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- jquery-cookie 로그아웃 기능 구현 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Black+Han+Sans&family=Nanum+Brush+Script&family=Nanum+Myeongjo&display=swap"
           rel="stylesheet">
 
     <title>MBeasTI | Home</title>
     <style>
-        /*배경시 ctrl + /*/
-        /*body {*/
-        /*    background-image: url(https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445_960_720.jpg);*/
-        /*    background-size: cover;*/
-        /*    background-position: unset;*/
-        /*    background-repeat: no-repeat;*/
 
-        /*}*/
+      body {
+        background-color: RGBA(232, 52, 8, 0.2);
+        min-height: 100vh;
+      }
+
+    .section {
+        padding: 1rem 1.5rem;
+        max-width: 750px;
+        margin: auto;
+    }
+
+    .title {
+        font-weight: 800;
+        font-size: 5rem;
+    }
+
+    .subtitle {
+        font-size: 2rem;
+    }
+
+    .is-sparta {
+        color: #f95700 !important;
+    }
 
         .title {
             font-family: 'Black Han Sans', sans-serif;
-            font-size: 400%;
+            font-size: 350%;
             text-align: center;
         }
 
         .survey {
             text-align: center;
-
+            color: #f95700;
             width: 300px;
-            margin: 350px auto auto auto;
+            margin: 100px auto auto auto;
             box-shadow: 0px 0px 3px 0px gray;
 
         }
+
+        .input-group mb-3 {
+            margin: 350px 350px 350px 350px;
+        }
+
 
         .wrap {
             width: 1000px;
@@ -49,31 +73,68 @@
         }
 
         .answer {
-            width: 1000px;
-            margin: 230px 10px 10px 100px;
+            width: 600px;
+            margin: 100px auto 500px auto;
         }
 
         .answer > button {
             width: 200px;
             height: 100px;
         }
-
+        .navbar .button{background-color:#F95700;color:#fff;}
 
     </style>
-</head>
+    <script>
+        function sign_out() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/login"
+        }
 
+        function yes1() {
+            localStorage.setItem("key1", 'E')
+            window.location.href = "/index2"
+
+        }
+
+        function no1() {
+
+            localStorage.setItem("key1", 'I')
+            window.location.href = "/index2"
+        }
+
+        function modify_user(){
+            window.location.href = "/user"
+        }
+    </script>
+</head>
 <body>
-    <div class="wrap">
-        <h1 class="title">M BeasT I</h1>
-        <div class="survey">
-            질문
-        </div>
-        <div class="answer">
-            <button type="button" class="btn btn-primary btn-lg">Yes</button>
-            <button type="button" class="btn btn-secondary btn-lg" style="margin-left: 350px;">No</button>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+                <a onclick="modify_user()" class="button is-dark" style="background-color: #f95700;">
+                    <strong>회원 정보 변경</strong>
+                </a>
+                <a onclick="sign_out()" class="button is-light" style="background-color: #f95700" ;>
+                    로그아웃
+                </a>
+            </div>
         </div>
     </div>
-
+    </div>
+</nav>
+<section class="hero is-white">
+    <div class="hero-body has-text-centered" style="padding-bottom:1rem;margin:auto;">
+        <h1 class="title is-sparta">MBTI 진단테스트</h1>
+        <h3 class="subtitle is-sparta">Q.1 나는 사람들과 만나는 것이 즐겁다</h3>
+    </div>
+</section>
+<div class="answer">
+        <button type="button" class="btn btn-primary btn-lg" style="background-color: #f95700"  onclick="yes1()">Yes</button>
+        <button type="button" class="btn btn-secondary btn-lg" style="background-color: #f95700; margin-left: 130px"  onclick="no1()">No</button>
+    </div>
 
 </body>
 
